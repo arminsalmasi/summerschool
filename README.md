@@ -7,7 +7,7 @@ Feel free to fork this repository and work through the exercises. You can also a
 
 
 ---
-## Notes
+## Armin
 
 This is my basic readme file.
 - [x] Have fun!
