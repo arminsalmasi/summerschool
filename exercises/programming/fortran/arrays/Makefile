@@ -17,13 +17,13 @@ CC=icc
 FC=ifort
 endif
 
-EXE=arrays
-OBJ=arrays.o
+EXE=exDy
+OBJ=exDy.o
 
 
 all: $(EXE)
 
-arrays.o: arrays.F90
+arrays.o: exDy.F90
 
 $(EXE): $(OBJ)
 	$(FC) $(FCFLAGS) $(OBJ) -o $@ 
