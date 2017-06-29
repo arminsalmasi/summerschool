@@ -32,3 +32,6 @@ solutions/programming/fortran/io/io
 *.Rproj
 .RData
 .Rhistory
+/exercises/heat/heattrans_proj/dist/
+/exercises/heat/heattrans_prj/dist/
+/exercises/heat/heattrans_prj/build/
