@@ -1,14 +1,20 @@
+!
+! To change this license header, choose License Headers in Project Properties.
+! To change this template file, choose Tools | Templates
+! and open the template in the editor.
+!
 module Input
 
-use heattrans_datastruc
+use dataStruc
   
   contains
-    function getInput(nx,ny,dx,dy,bottomBC,tophBC,rightBC,leftBC,midVal)
+    logical function getInput(nx,ny,dx,dy,bottomBC,tophBC,rightBC,leftBC,midVal)
+      
+    integer :: nx, ny
+    real :: dx,dy, bottomBC,tophBC,rightBC,leftBC,midVal
+      
 
-      implicit none
-
- 
-      write(*,*) "enter nx"
+    write(*,*) "enter nx"
       read(*,*) nx
 
       write(*,*) "enter ny"
@@ -37,4 +43,5 @@ use heattrans_datastruc
       
 
     end function getInput
-end module getgInput  
+end module Input  
+
