@@ -35,6 +35,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/Init.o \
 	${OBJECTDIR}/dataStruc.o \
 	${OBJECTDIR}/getInput.o \
 	${OBJECTDIR}/main.o
@@ -63,6 +64,10 @@ LDLIBSOPTIONS=
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/heattrans_prj: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.f} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/heattrans_prj ${OBJECTFILES} ${LDLIBSOPTIONS}
+
+${OBJECTDIR}/Init.o: Init.f90
+	${MKDIR} -p ${OBJECTDIR}
+	$(COMPILE.f) -O2 -o ${OBJECTDIR}/Init.o Init.f90
 
 ${OBJECTDIR}/dataStruc.o: dataStruc.f90
 	${MKDIR} -p ${OBJECTDIR}
