@@ -5,41 +5,41 @@
 !
 module Input
 
-use dataStruc
+!use dataStruc
   
   contains
-    logical function getInput(nx,ny,dx,dy,bottomBC,tophBC,rightBC,leftBC,midVal)
+    logical function getInput(xnum,ynum,deltax,deltay,BCbot,BCtop,BCright,BCleft,ValsMid)
       
-    integer :: nx, ny
-    real :: dx,dy, bottomBC,tophBC,rightBC,leftBC,midVal
+    integer :: xNum, yNum
+    real :: deltaX,deltaY, bcBot,bcTop,bcRight,bcLeft,valsMid
       
 
     write(*,*) "enter nx"
-      read(*,*) nx
+      read(*,*) xNum
 
       write(*,*) "enter ny"
-      read(*,*) ny
+      read(*,*) yNum
 
       write(*,*) "enter dx"
-      read(*,*) dx
+      read(*,*) deltaX
 
       write(*,*) "enter dy" 
-      read(*,*) dy
+      read(*,*) deltaY
 
       write(*,*) "enter BC for bottom boundary"
-      read(*,*) lowbC
+      read(*,*) bcBot
 
       write(*,*) "enter BC for top boundary"
-      read(*,*) topBC
+      read(*,*) bcTop
 
       write(*,*) "enter BC for left boundary"
-      read(*,*) leftBC
+      read(*,*) bcLeft
 
       write(*,*) "enter BC for right boundary"
-      read(*,*) rightBC
+      read(*,*) bcRight
 
       write(*,*) "enter midpoint values"
-      read(*,*) midVal
+      read(*,*) valsMid
       
 
     end function getInput
