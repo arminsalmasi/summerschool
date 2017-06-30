@@ -9,19 +9,19 @@ CND_DISTDIR=dist
 # Debug configuration
 CND_PLATFORM_Debug=GNU-Linux
 CND_ARTIFACT_DIR_Debug=dist/Debug/GNU-Linux
-CND_ARTIFACT_NAME_Debug=heattrans_prj
-CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-Linux/heattrans_prj
+CND_ARTIFACT_NAME_Debug=ht
+CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-Linux/ht
 CND_PACKAGE_DIR_Debug=dist/Debug/GNU-Linux/package
-CND_PACKAGE_NAME_Debug=heattransprj.tar
-CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux/package/heattransprj.tar
+CND_PACKAGE_NAME_Debug=ht.tar
+CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux/package/ht.tar
 # Release configuration
 CND_PLATFORM_Release=GNU-Linux
 CND_ARTIFACT_DIR_Release=dist/Release/GNU-Linux
-CND_ARTIFACT_NAME_Release=heattrans_prj
-CND_ARTIFACT_PATH_Release=dist/Release/GNU-Linux/heattrans_prj
+CND_ARTIFACT_NAME_Release=ht
+CND_ARTIFACT_PATH_Release=dist/Release/GNU-Linux/ht
 CND_PACKAGE_DIR_Release=dist/Release/GNU-Linux/package
-CND_PACKAGE_NAME_Release=heattransprj.tar
-CND_PACKAGE_PATH_Release=dist/Release/GNU-Linux/package/heattransprj.tar
+CND_PACKAGE_NAME_Release=ht.tar
+CND_PACKAGE_PATH_Release=dist/Release/GNU-Linux/package/ht.tar
 #
 # include compiler specific variables
 #

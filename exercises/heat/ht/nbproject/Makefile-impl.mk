@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=heattrans_prj
+PROJECTNAME=ht
 
 # Active Configuration
 DEFAULTCONF=Debug

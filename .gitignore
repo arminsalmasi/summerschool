@@ -35,3 +35,6 @@ solutions/programming/fortran/io/io
 /exercises/heat/heattrans_proj/dist/
 /exercises/heat/heattrans_prj/dist/
 /exercises/heat/heattrans_prj/build/
+/exercises/heat/heatrans/build/
+/exercises/heat/ht/build/
+/exercises/heat/ht/dist/

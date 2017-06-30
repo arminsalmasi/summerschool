@@ -23,7 +23,7 @@ AS=as
 # Macros
 CND_PLATFORM=GNU-Linux
 CND_DLIB_EXT=so
-CND_CONF=Release
+CND_CONF=Debug
 CND_DISTDIR=dist
 CND_BUILDDIR=build
 
@@ -35,8 +35,9 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/Init.o \
-	${OBJECTDIR}/dataStruc.o \
+	${OBJECTDIR}/allocation.o \
+	${OBJECTDIR}/calc.o \
+	${OBJECTDIR}/datastruc.o \
 	${OBJECTDIR}/getInput.o \
 	${OBJECTDIR}/main.o
 
@@ -59,27 +60,31 @@ LDLIBSOPTIONS=
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
-	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/heattrans_prj
+	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/ht
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/heattrans_prj: ${OBJECTFILES}
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/ht: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${LINK.f} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/heattrans_prj ${OBJECTFILES} ${LDLIBSOPTIONS}
+	${LINK.f} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/ht ${OBJECTFILES} ${LDLIBSOPTIONS}
 
-${OBJECTDIR}/Init.o: Init.f90
+${OBJECTDIR}/allocation.o: allocation.f90
 	${MKDIR} -p ${OBJECTDIR}
-	$(COMPILE.f) -O2 -o ${OBJECTDIR}/Init.o Init.f90
+	$(COMPILE.f) -g -o ${OBJECTDIR}/allocation.o allocation.f90
 
-${OBJECTDIR}/dataStruc.o: dataStruc.f90
+${OBJECTDIR}/calc.o: calc.f90
 	${MKDIR} -p ${OBJECTDIR}
-	$(COMPILE.f) -O2 -o ${OBJECTDIR}/dataStruc.o dataStruc.f90
+	$(COMPILE.f) -g -o ${OBJECTDIR}/calc.o calc.f90
+
+${OBJECTDIR}/datastruc.o: datastruc.f90
+	${MKDIR} -p ${OBJECTDIR}
+	$(COMPILE.f) -g -o ${OBJECTDIR}/datastruc.o datastruc.f90
 
 ${OBJECTDIR}/getInput.o: getInput.f90
 	${MKDIR} -p ${OBJECTDIR}
-	$(COMPILE.f) -O2 -o ${OBJECTDIR}/getInput.o getInput.f90
+	$(COMPILE.f) -g -o ${OBJECTDIR}/getInput.o getInput.f90
 
 ${OBJECTDIR}/main.o: main.f90
 	${MKDIR} -p ${OBJECTDIR}
-	$(COMPILE.f) -O2 -o ${OBJECTDIR}/main.o main.f90
+	$(COMPILE.f) -g -o ${OBJECTDIR}/main.o main.f90
 
 # Subprojects
 .build-subprojects:

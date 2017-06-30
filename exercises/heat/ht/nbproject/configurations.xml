@@ -12,8 +12,9 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
-      <itemPath>Init.f90</itemPath>
-      <itemPath>dataStruc.f90</itemPath>
+      <itemPath>allocation.f90</itemPath>
+      <itemPath>calc.f90</itemPath>
+      <itemPath>datastruc.f90</itemPath>
       <itemPath>getInput.f90</itemPath>
       <itemPath>main.f90</itemPath>
     </logicalFolder>
@@ -39,9 +40,11 @@
       </toolsSet>
       <compileType>
       </compileType>
-      <item path="Init.f90" ex="false" tool="2" flavor2="0">
+      <item path="allocation.f90" ex="false" tool="2" flavor2="0">
       </item>
-      <item path="dataStruc.f90" ex="false" tool="2" flavor2="0">
+      <item path="calc.f90" ex="false" tool="2" flavor2="0">
+      </item>
+      <item path="datastruc.f90" ex="false" tool="2" flavor2="0">
       </item>
       <item path="getInput.f90" ex="false" tool="2" flavor2="0">
       </item>
@@ -68,9 +71,11 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
-      <item path="Init.f90" ex="false" tool="2" flavor2="0">
+      <item path="allocation.f90" ex="false" tool="2" flavor2="0">
       </item>
-      <item path="dataStruc.f90" ex="false" tool="2" flavor2="0">
+      <item path="calc.f90" ex="false" tool="2" flavor2="0">
+      </item>
+      <item path="datastruc.f90" ex="false" tool="2" flavor2="0">
       </item>
       <item path="getInput.f90" ex="false" tool="2" flavor2="0">
       </item>
