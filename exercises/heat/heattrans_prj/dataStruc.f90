@@ -13,7 +13,7 @@ Public
   logical, public :: in_err, out_errq, out_err2
   
 
-  type grid
+  type gr
      real, allocatable :: prevGrid(:,:)
      real, allocatable :: lapl(:,:)
      real, allocatable :: currGrid(:,:)
