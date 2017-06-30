@@ -17,7 +17,7 @@ module calc
  
       endfunction doInitGrid
 
-      function doCalcLapl(currvec)
+      function doCalcLapl(currvec, dx,dy)
         real :: currvec(:,:)
         integer :: i,j
         
@@ -25,6 +25,8 @@ module calc
         
         do i = 2, size(currvec,1)
             do j = 2, size(currvec,2)
+            doCalcLapl(i,j) = ( (currvec(i-1,j) - 2 * currvec(i,j) + currvec(i+1,j) ) / (dx*dx) ) &
+                + ( (currvec(i,j-1) - 2 * currvec(i,j) + currvec(i,j+1) )/ (dy*dy) )
             end do
         end do    
          
