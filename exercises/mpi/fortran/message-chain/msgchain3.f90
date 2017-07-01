@@ -30,6 +30,15 @@ program basic
           '. Tag: ', myid+1, '. Receiver: ', myid+1
   end if
 
+  if (myid == ntasks) then
+     call mpi_sendrecv(message, size, MPI_INTEGER, MPI_PROC_NULL, myid+1, &
+      receiveBuffer, size, MPI_INTEGER, MPI_PROC_NULL, myid, MPI_COMM_WORLD, status, rc)
+     write(*,'(A10,I3,A20,I8,A,I3,A,I3)') 'Sender: ', myid, &
+          ' Sent elements: ',size, &
+          '. Tag: ', myid+1, '. Receiver: ', myid+1
+
+  end if
+
   if ( myid > 0 ) then
 
      call mpi_sendrecv(message,size, MPI_INTEGER, myid-1, myid-1, &
@@ -38,6 +47,22 @@ program basic
      write(*,'(A10,I3,A,I3)') 'Receiver: ', myid, &
           ' First element: ', receiveBuffer(1)
   end if
+
+
+
+  ! 0 side 
+  if (myid == 0) then
+
+     call mpi_sendrecv(message,size, MPI_INTEGER, myid, myid, &
+      receiveBuffer,size, MPI_INTEGER, MPI_PROC_NULL, myid, MPI_COMM_WORLD, status, rc)
+
+      write(*,'(A10,I3,A,I3)') 'Receiver: ', myid, &
+          ' First element: ', receiveBuffer(1)
+     
+  end if
+
+  
+
 
   ! Finalize measuring the time and print it out
   t1 = mpi_wtime()
