@@ -1,9 +1,13 @@
 program hello
+  use mpi
   implicit none
 
-  print *, 'Hello world!'
-  !$omp parallel
+  integer :: rank, rc
+  call mpi_init()
+  call mpi_comm_rank(MPI_COMM_WORLD, rank, rc)
+  print *, 'Hello world!' ,rank
+  
   print *, 'X'
-  !$omp end parallel
+  cal mpi_finalize
 
 end program hello
