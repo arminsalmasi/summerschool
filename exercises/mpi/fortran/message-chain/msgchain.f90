@@ -13,7 +13,7 @@ program basic
 
   call mpi_init(rc)
   call mpi_comm_rank(MPI_COMM_WORLD, myid, rc)
-  call mpi_comm_sizeMPI_COMM_WORLD, ntasks, rc)
+  call mpi_comm_size(MPI_COMM_WORLD, ntasks, rc)
 
   message = myid
 
@@ -23,6 +23,9 @@ program basic
 
   ! TODO: Send and receive as defined in the assignment
   if ( myid < ntasks-1 ) then
+     call mpi_send(message,size, MPI_INTEGER, myid+1, myid+1, MPI_COMM_WORLD, rc)
+
+     call mpi_recv(receiveBuffer,size, MPI_INTEGER, myid+1, myid, MPI_COMM_WORLD,status, rc)
 
      write(*,'(A10,I3,A20,I8,A,I3,A,I3)') 'Sender: ', myid, &
           ' Sent elements: ',size, &
@@ -30,6 +33,10 @@ program basic
   end if
 
   if ( myid > 0 ) then
+
+     call mpi_recv(receiveBuffer,size, MPI_INTEGER, myid-1, myid, MPI_COMM_WORLD,status, rc)
+
+     call mpi_send(message,size, MPI_INTEGER, myid-1, myid-1, MPI_COMM_WORLD, rc)
 
      write(*,'(A10,I3,A,I3)') 'Receiver: ', myid, &
           ' First element: ', receiveBuffer(1)
