@@ -28,6 +28,10 @@ program basic
      write(*,'(A10,I3,A20,I8,A,I3,A,I3)') 'Sender: ', myid, &
           ' Sent elements: ',size, &
           '. Tag: ', myid+1, '. Receiver: ', myid+1
+
+     write(*,*) 'data received' ,myid+1
+     call MPI_Get_count(status, MPI_integer, count,rc)
+     write(*,*) count 
   end if
 
   if (myid == ntasks) then
@@ -35,8 +39,10 @@ program basic
       receiveBuffer, size, MPI_INTEGER, MPI_PROC_NULL, myid, MPI_COMM_WORLD, status, rc)
      write(*,'(A10,I3,A20,I8,A,I3,A,I3)') 'Sender: ', myid, &
           ' Sent elements: ',size, &
-          '. Tag: ', myid+1, '. Receiver: ', myid+1
-
+          '. Tag: ', myid, '. Receiver: ', 'null'
+     write(*,*) 'data received' ,myid
+    call MPI_Get_count(status, MPI_integer, count,rc)
+     write(*,*) count 
   end if
 
   if ( myid > 0 ) then
@@ -46,6 +52,9 @@ program basic
 
      write(*,'(A10,I3,A,I3)') 'Receiver: ', myid, &
           ' First element: ', receiveBuffer(1)
+     write(*,*) 'data received' ,myid
+     call MPI_Get_count(status, MPI_integer, count,rc)
+     write(*,*) count 
   end if
 
 
@@ -57,7 +66,10 @@ program basic
       receiveBuffer,size, MPI_INTEGER, MPI_PROC_NULL, myid, MPI_COMM_WORLD, status, rc)
 
       write(*,'(A10,I3,A,I3)') 'Receiver: ', myid, &
-          ' First element: ', receiveBuffer(1)
+           ' First element: ', receiveBuffer(1)
+      write(*,*) 'data received', myid
+     call MPI_Get_count(status, MPI_integer, count,rc)
+     write(*,*) count 
      
   end if
 
