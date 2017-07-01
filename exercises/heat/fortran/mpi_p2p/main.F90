@@ -9,7 +9,7 @@ program heat_solve
   use mpi
 
   implicit none
-
+      integer :: rc
   real(dp), parameter :: a = 0.5 ! Diffusion constant
   type(field) :: current, previous    ! Current and previus temperature fields
 
@@ -25,7 +25,9 @@ program heat_solve
   real(kind=dp) :: start, stop ! Timers
 
   ! TODO start: initialize MPI
-
+      call mpi_init(rc)
+      call mpi_comm_rank(MPI_COMM_WORLD,parallelization%rank,rc)
+      call mpi_comm_size(MPI_COMM_WORLD,parallelization%size,rc)
   ! TODO end
 
   call initialize(current, previous, nsteps, parallelization)
@@ -61,7 +63,7 @@ program heat_solve
   call finalize(current, previous)
 
   ! TODO start: finalize MPI
-
+      call mpi_finalize(rc)
   ! TODO end
 
 end program heat_solve
