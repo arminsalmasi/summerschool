@@ -2,6 +2,10 @@ module datastruc
     
     public
     
+    integer :: nx, ny
+    real    :: dx, dy, bottomBC, topBC, leftBC, rightBC, midVal
+    logical :: in_err
+    
     type gr
         real, allocatable :: prevGrid(:,:)
         real, allocatable :: lapl(:,:)
