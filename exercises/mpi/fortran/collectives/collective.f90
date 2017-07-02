@@ -4,11 +4,11 @@ program coll_exer
 
   integer, parameter :: n_mpi_tasks = 4
 
-  integer :: ntasks, rank, ierr, i, color, sub_comm
+  integer :: ntasks, rank, ierr, i, color, subcom, mysubid
   integer, dimension(2*n_mpi_tasks) :: sendbuf, recvbuf
   integer, dimension(2*n_mpi_tasks**2) :: printbuf
   integer,dimension(4) :: sendcnts,displs
-
+  
   call mpi_init(ierr)
   call mpi_comm_size(MPI_COMM_WORLD, ntasks, ierr)
   call mpi_comm_rank(MPI_COMM_WORLD, rank, ierr)
@@ -43,8 +43,27 @@ program coll_exer
           !     MPI_COMM_WORLD,ierr)
 
         !taskD
-          call mpi_alltoall(sendbuf,2,MPI_INTEGER,recvbuf,2,MPI_INTEGER,&
-               MPI_COMM_WORLD,ierr)  
+          !call mpi_alltoall(sendbuf,2,MPI_INTEGER,recvbuf,2,MPI_INTEGER,&
+          !     MPI_COMM_WORLD,ierr)
+
+        !task6 mpiIII
+          if (rank ==0 .or. rank ==1) then
+            color = 1
+          else
+            color = 2
+          endif
+          call MPI_COMM_SPLIT(MPI_COMM_WORLD, color, rank, subcom, ierr)          
+          call mpi_comm_rank(subcom,mysubid,ierr)
+          write(*,*) 'my rank in commworld : ', rank
+          write(*,*) 'my rank in subcomm is : ', mysubid
+          call mpi_reduce(sendbuf,recvbuf,8,MPI_INTEGER,MPI_SUM,0,subcom,ierr)          
+
+          
+
+        
+
+
+  
   ! Print data that was received
   ! TODO: add correct buffer
   call print_buffers(recvbuf)
