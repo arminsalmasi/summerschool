@@ -7,6 +7,7 @@ program coll_exer
   integer :: ntasks, rank, ierr, i, color, sub_comm
   integer, dimension(2*n_mpi_tasks) :: sendbuf, recvbuf
   integer, dimension(2*n_mpi_tasks**2) :: printbuf
+  integer,dimension(4) :: sendcnts,displs
 
   call mpi_init(ierr)
   call mpi_comm_size(MPI_COMM_WORLD, ntasks, ierr)
@@ -28,9 +29,25 @@ program coll_exer
   ! TODO: use a single collective communication call (and maybe prepare
   !       some parameters for the call)
 
+        !taska!
+         !call mpi_bcast(sendbuf, 2*n_mpi_tasks, MPI_INTEGER, 0 , MPI_COMM_WORLD, ierr )     
+
+        !taskb!
+         !call mpi_scatter(sendbuf, 2, MPI_INTEGER,recvbuf,2,MPI_INTEGER,0,MPI_COMM_WORLD,ierr)
+
+        !taskc 
+          !sendcnts = (/1,1,2,4/) 
+          !displs = (/0,1,2,4/)
+          !call mpi_gatherv(sendbuf, sendcnts(rank+1), MPI_INTEGER,&
+          !     recvbuf,sendcnts,displs,MPI_INTEGER,1,&
+          !     MPI_COMM_WORLD,ierr)
+
+        !taskD
+          call mpi_alltoall(sendbuf,2,MPI_INTEGER,recvbuf,2,MPI_INTEGER,&
+               MPI_COMM_WORLD,ierr)  
   ! Print data that was received
   ! TODO: add correct buffer
-  call print_buffers(...)
+  call print_buffers(recvbuf)
 
   call mpi_finalize(ierr)
 
