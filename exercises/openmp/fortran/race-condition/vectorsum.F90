@@ -9,18 +9,24 @@ program vectorsum
   integer(kind=ik) :: i
 
   ! Initialization of vector
-  do i = 1, nx
-     vecA(i) = i
-  end do
 
-  sum = 0
+   do i = 1, nx
+     vecA(i) = i
+   end do
+
+   sum = 0
+
   ! TODO: Parallelize the computation
   !!$omp parallel shared(sum, vecA) private(i)
   !!$omp do reduction(+:sum)
-  do i = 1, nx
-     sum = sum + vecA(i)
-  end do
+
+    do i = 1, nx
+       sum = sum + vecA(i)
+    end do
+
   !!$omp end do
   !!$omp end parallel
+  
   write(*,*) 'Sum: ', sum
+
 end program vectorsum
