@@ -16,11 +16,13 @@ use omp_lib
   end do
 
   starttime=omp_get_wtime()
-  !$omp parallel do shared(vecA,vecB) PRIVATE(i)
-  do i = 1 , size(vecA) 
+  !! TODO initiate loop starts
+   !$omp parallel do shared(vecA,vecB) PRIVATE(i)  
+  ! TODO Compute the check value !! DONE
+   do i = 1 , size(vecA) 
      vecC(i) = vecA(i) ** vecB(i)
-  enddo   
-  ! Compute the check value
+   enddo   
+  ! TODO Compute the check value !! DONE
   !$omp end parallel do
   endtime=omp_get_wtime()
   write(*,*) 'Reduction sum: ', sum(vecC)
