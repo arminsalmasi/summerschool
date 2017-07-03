@@ -34,13 +34,20 @@ program cart_test
      call mpi_abort(mpi_comm_world, 1, rc)
   end if
   
+  
   ! Create the 2D Cartesian communicator
   ! TO DO
+    call mpi_cart_create( MPI_COMM_WORLD,2,dims,period,.true.,comm2d,rc)
   ! Find out & store the neighboring ranks 
   ! TO DO
+    call mpi_cart_shift(comm2d,0,1,neighbors(1),neighbors(2),rc )
+    call mpi_cart_shift(comm2d,1,1,neighbors(3),neighbors(4),rc )
   ! Find out & store also the Cartesian coordinates of a rank
   ! TO DO
-  
+    call mpi_cart_coords(comm2d,my_id, 2 , coord, rc)
+    !call mpi_cart_coords(comm2d,neighbors(2),coord,rc)
+    !call mpi_cart_coords(comm2d,neighbors(3),coord,rc)
+    !call mpi_cart_coords(comm2d,neighbors(4),coord,rc)
   do irank = 0, ntask-1
      if (my_id == irank) print '(I3,A,2I2,A,4I3)', &
           my_id, '=', coord, ' neighbors=', neighbors(:)
