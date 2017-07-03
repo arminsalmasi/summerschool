@@ -30,14 +30,14 @@ program datatype_struct
     end do  
   end if
   
-  ! TODO: Determine the true extent of one particle struct
+  
   call MPI_GET_ADDRESS(particles(1),lb1,ierror)
   call MPI_GET_ADDRESS(particles(2),lb2,ierror)
   extent = lb2 - lb1
 
 
   t1=MPI_WTIME()
-  ! TODO: send and receive using the MPI_BYTE datatype
+  
   if(myid == 0) then
      do i=1,1000
         call MPI_SEND(particles, n*extent, MPI_BYTE, 1, i, &
