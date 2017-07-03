@@ -26,7 +26,7 @@ program pario
   allocate(localvector(localsize))
 
   localvector = [(i + my_id * localsize, i=1,localsize)]
-
+  call multiple_writer()
   call single_writer()
 
   deallocate(localvector)
@@ -51,5 +51,18 @@ contains
             write(*,*) 'to the file: ', size(fullvector), 'elements' 
           endif       
   end subroutine single_writer
+  
+
+  subroutine multiple_writer()
+     character(LEN=20) :: filenamest
+     write(filenamest,"(A5,I1,A4)") 'out_',my_id,'.dat'
+     filenamest=trim(filenamest)
+     filenamest=adjustl(filenamest)
+     write(*,*) filenamest
+     open(11, file=filenamest, status='replace',form='unformatted',access='stream')
+     write(11,pos=1) localvector 
+     close(11)
+     
+  end subroutine multiple_writer
 
 end program pario
