@@ -7,7 +7,7 @@ program datatype_struct
      character(len=2) :: label
   end type particle
   integer, parameter :: n = 1000
-  integer :: i, ierror,  myid,  ntasks, tag
+  integer :: i, ierror,  myid,  ntasks, tag,temp
   type(particle) :: particles(n)
   
   integer, parameter :: cnt=3
@@ -39,13 +39,13 @@ program datatype_struct
   t1=MPI_WTIME()
   if(myid == 0) then
      do i=1,1000
-        call MPI_SEND(particles, n*extent, MPI_BYTE, 1, i, &
-             MPI_COMM_WORLD,ierror)
+       temp = n*extent
+       call MPI_SEND(particles,temp,MPI_byte,1,i,MPI_COMM_WORLD,ierror)
      end do
   else if(myid == 1) then
      do i=1, 1000
-        call MPI_RECV(particles, n*extent , MPI_BYTE, 0, i, &
-             MPI_COMM_WORLD, MPI_STATUS_IGNORE, ierror)
+      temp = n*extent
+      call MPI_RECV(particles, temp , MPI_byte, 0, i,MPI_COMM_WORLD, MPI_STATUS_IGNORE, ierror)
      end do
   end if
   t2=MPI_WTIME()
