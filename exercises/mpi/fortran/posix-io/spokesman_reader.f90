@@ -39,6 +39,7 @@ contains
   subroutine single_reader()
     implicit none
 
+<<<<<<< HEAD
     if (my_id == writer_id) then
       open(10, file='out_1.dat', status='old', form='unformatted', &
            & access='stream')
@@ -50,6 +51,10 @@ contains
 
     call mpi_scatter(fullvector, localsize, mpi_integer, localvector, &
          & localsize, mpi_integer, writer_id, mpi_comm_world, rc)
+=======
+! TODO: Implement a function that will read the data from a file so that
+!       a single process does the file io. Use rank WRITER_ID as the io rank 
+>>>>>>> 9edadcb5a868c2876b999a9de6bddbf7c26b17ec
 
   end subroutine single_reader
 
