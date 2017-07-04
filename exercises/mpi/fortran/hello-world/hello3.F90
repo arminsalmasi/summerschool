@@ -3,7 +3,7 @@
   implicit none
 
   integer :: rank, rc, numproc
-  call mpi_init(rc)
+  call mpi_init_thread(rc)
   call mpi_comm_rank(MPI_COMM_WORLD, rank, rc)
 
   print *, 'Hello world!' ,rank
