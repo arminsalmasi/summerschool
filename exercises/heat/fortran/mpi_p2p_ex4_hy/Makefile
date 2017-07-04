@@ -5,7 +5,7 @@ COMMONDIR=../../common
 ifeq ($(COMP),cray)
 FC=ftn
 CC=cc
-FCFLAGS=-O3 
+FCFLAGS=-O3 -h bounds
 CCFLAGS=-O3 -I/appl/opt/libpng/include -I$(COMMONDIR)
 LDFLAGS=-L/appl/opt/libpng/lib
 LIBS=-lpng -lz

@@ -18,13 +18,13 @@ program heat_solve
   integer, parameter :: image_interval = 500 ! Image output interval
 
   type(parallel_data) :: parallelization
-  integer :: ierr, prov
+  integer :: ierr, prov, omp_num
 
   integer :: iter
 
   real(kind=dp) :: start, stop ! Timers
 
-  call mpi_init_thread(mpi_thread_seialized,prov, ierr)
+  call mpi_init_thread(mpi_thread_serialized,prov, ierr)
   if (prov < mpi_thread_funneled) then
     
   end if
@@ -41,20 +41,30 @@ program heat_solve
   ! image_interval steps
 
   start =  mpi_wtime()
-  
-  !$omp parallel 
-   !$omp parallel do
+!##################################################################### 
+
+   !$omp parallel private(omp_num,ierr)
+
+     omp_num= omp_get_thread_num()
+
      do iter = 1, nsteps
-       call exchange(previous, parallelization)
+!$omp master 
+       call exchange(previous, parallelization, omp_num)
+!$omp end master
        call evolve(current, previous, a, dt)
        if (mod(iter, image_interval) == 0) then
+!$omp master
           call write_field(current, iter, parallelization)
+!$omp end master
        end if
+!$omp master
        call swap_fields(current, previous)
+!$omp end master
      end do
-     !$omp end paralleld do
-  !$omp parallel ens
-  
+
+     !$omp end parallel
+
+ !##################################################################
   stop = mpi_wtime()
 
   if (parallelization % rank == 0) then
