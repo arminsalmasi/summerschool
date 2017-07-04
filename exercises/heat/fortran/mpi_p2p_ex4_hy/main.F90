@@ -24,15 +24,10 @@ program heat_solve
 
   real(kind=dp) :: start, stop ! Timers
 
-  ! TODO start: initialize MPI
-      call mpi_init_thread(mpi_thread_funneled,prov, ierr)
-      if (prov < mpi_thread_funneled) then
+  call mpi_init_thread(mpi_thread_seialized,prov, ierr)
+  if (prov < mpi_thread_funneled) then
     
-      end if
-      !call mpi_comm_rank(MPI_COMM_WORLD,parallelization%rank,rc)
-      !call mpi_comm_size(MPI_COMM_WORLD,parallelization%size,rc)
-  ! TODO end
-
+  end if
   call initialize(current, previous, nsteps, parallelization)
 
   ! Draw the picture of the initial state
@@ -47,7 +42,8 @@ program heat_solve
 
   start =  mpi_wtime()
   
-
+  !$omp parallel 
+   !$omp parallel do
      do iter = 1, nsteps
        call exchange(previous, parallelization)
        call evolve(current, previous, a, dt)
@@ -56,8 +52,9 @@ program heat_solve
        end if
        call swap_fields(current, previous)
      end do
-
-
+     !$omp end paralleld do
+  !$omp parallel ens
+  
   stop = mpi_wtime()
 
   if (parallelization % rank == 0) then
