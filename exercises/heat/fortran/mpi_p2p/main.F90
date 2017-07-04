@@ -18,14 +18,17 @@ program heat_solve
   integer, parameter :: image_interval = 500 ! Image output interval
 
   type(parallel_data) :: parallelization
-  integer :: ierr
+  integer :: ierr, prov
 
   integer :: iter
 
   real(kind=dp) :: start, stop ! Timers
 
   ! TODO start: initialize MPI
-      call mpi_init(ierr)
+      call mpi_init_thread(mpi_thread_funneled,prov, ierr)
+      if (prov < mpi_thread_funneled) then
+    
+      end if
       !call mpi_comm_rank(MPI_COMM_WORLD,parallelization%rank,rc)
       !call mpi_comm_size(MPI_COMM_WORLD,parallelization%size,rc)
   ! TODO end
@@ -44,18 +47,16 @@ program heat_solve
 
   start =  mpi_wtime()
   
-!
 
-  do iter = 1, nsteps
-     call exchange(previous, parallelization)
-     call evolve(current, previous, a, dt)
-     if (mod(iter, image_interval) == 0) then
-        call write_field(current, iter, parallelization)
-     end if
-     call swap_fields(current, previous)
-  end do
+     do iter = 1, nsteps
+       call exchange(previous, parallelization)
+       call evolve(current, previous, a, dt)
+       if (mod(iter, image_interval) == 0) then
+          call write_field(current, iter, parallelization)
+       end if
+       call swap_fields(current, previous)
+     end do
 
-!
 
   stop = mpi_wtime()
 

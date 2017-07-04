@@ -40,13 +40,17 @@ contains
     
     ! Send to left, receive from right
       
-      call mpi_isend(field0%data(0,1),field0%nx+2,MPI_DOUBLE_PRECISION,parallel%nleft,10,MPI_COMM_WORLD,req10,ierr)
-      call mpi_irecv(field0%data(0,field0%ny+1),field0%nx+2,MPI_DOUBLE_PRECISION,parallel%nright,10,MPI_COMM_WORLD,req11, ierr)
+      call mpi_isend(field0%data(0,1),field0%nx+2,MPI_DOUBLE_PRECISION,&
+                     parallel%nleft,10,MPI_COMM_WORLD,req10,ierr)
+      call mpi_irecv(field0%data(0,field0%ny+1),field0%nx+2,MPI_DOUBLE_PRECISION,&
+                     parallel%nright,10,MPI_COMM_WORLD,req11, ierr)
 
     ! Send to right, receive from left
       
-      call mpi_isend(field0%data(0,field0%ny),field0%nx+2,MPI_DOUBLE_PRECISION,parallel%nright,11,MPI_COMM_WORLD,req12,ierr)
-      call mpi_irecv(field0%data(0,0),field0%nx+2,MPI_DOUBLE_PRECISION,parallel%nleft,11,MPI_COMM_WORLD,req13,ierr)
+      call mpi_isend(field0%data(0,field0%ny),field0%nx+2,MPI_DOUBLE_PRECISION,&
+                     parallel%nright,11,MPI_COMM_WORLD,req12,ierr)
+      call mpi_irecv(field0%data(0,0),field0%nx+2,MPI_DOUBLE_PRECISION,&
+                     parallel%nleft,11,MPI_COMM_WORLD,req13,ierr)
       
 
 
@@ -76,15 +80,19 @@ contains
     nx = curr%nx
     ny = curr%ny
 
-    do j = 1, ny
-       do i = 1, nx
-          curr%data(i, j) = prev%data(i, j) + a * dt * &
-               & ((prev%data(i-1, j) - 2.0 * prev%data(i, j) + &
-               &   prev%data(i+1, j)) / curr%dx**2 + &
-               &  (prev%data(i, j-1) - 2.0 * prev%data(i, j) + &
-               &   prev%data(i, j+1)) / curr%dy**2)
-       end do
-    end do
+  !$omp parallel 
+    !$omp parallel do     
+      do j = 1, ny
+         do i = 1, nx
+            curr%data(i, j) = prev%data(i, j) + a * dt * &
+                & ((prev%data(i-1, j) - 2.0 * prev%data(i, j) + &
+                &   prev%data(i+1, j)) / curr%dx**2 + &
+                &  (prev%data(i, j-1) - 2.0 * prev%data(i, j) + &
+                &   prev%data(i, j+1)) / curr%dy**2)
+         end do
+      end do
+    !$omp end do
+  !$omp end parallel
   end subroutine evolve
 
 end module core
